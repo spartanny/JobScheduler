@@ -4,7 +4,6 @@ import Entities.Job;
 import Entities.Worker;
 import SchedulingStrategy.ISchedulingStrategy;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.List;
@@ -15,7 +14,7 @@ public class ThreadManager {
     PriorityQueue<Worker> pq;
 
     public ThreadManager() {
-        pq = new PriorityQueue<Worker>(Comparator.comparingInt(Worker::getAvailableAt));
+        pq = new PriorityQueue<>(Comparator.comparingInt(Worker::getAvailableAt));
     }
 
     public static ThreadManager getInstance() {
@@ -28,6 +27,7 @@ public class ThreadManager {
     public void init(int numOfWorkers) {
         if(numOfWorkers <= 0)
             return;
+        pq.clear();
         for(int i=0; i< numOfWorkers; i++) {
             Worker worker = new Worker(i+1);
             pq.add(worker);
@@ -37,5 +37,6 @@ public class ThreadManager {
 
     public void schedule(ISchedulingStrategy strategy, List<Job> jobs) {
         strategy.run(pq, jobs);
+        init(pq.size());
     }
 }

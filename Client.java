@@ -2,6 +2,7 @@ import Builder.JobBuilder;
 import Entities.Job;
 import Entities.User;
 import SchedulingStrategy.FcfsStrategy;
+import SchedulingStrategy.SjfStrategy;
 import Threads.ThreadManager;
 
 import java.lang.*;
@@ -24,6 +25,12 @@ public class Client {
         Job job4 = jobBuilder.name("J4").duration(30).priority(1).deadline(40).user(User.USER).build();
         Job job5 = jobBuilder.name("J5").duration(10).priority(2).deadline(30).user(User.USER).build();
 
-        threadManager.schedule(new FcfsStrategy(), List.of(job1, job2, job3, job4, job5));
+        List<Job> tasks = List.of(job1, job2, job3, job4, job5);
+
+        System.out.println("SJF");
+        threadManager.schedule(new SjfStrategy(), tasks);
+
+        System.out.println("FCFS");
+        threadManager.schedule(new FcfsStrategy(), tasks);
     }
 }

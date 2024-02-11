@@ -10,6 +10,7 @@ public class Worker {
     int availableAt;
     int id;
 
+    public int getId() { return id; }
     public int getAvailableAt() {
         return availableAt;
     }
