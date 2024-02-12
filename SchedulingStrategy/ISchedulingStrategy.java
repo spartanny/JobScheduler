@@ -2,6 +2,7 @@ package SchedulingStrategy;
 
 import Entities.Job;
 import Entities.Worker;
+import Threads.ThreadManager;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,7 +11,7 @@ import java.util.PriorityQueue;
 
 public interface ISchedulingStrategy {
 
-    void run(PriorityQueue<Worker> workers, List<Job> jobs);
+    void run(ThreadManager threadManager, List<Job> jobs);
     default void readJobs(PriorityQueue<Worker> workers, List<Job> jobs) {
         for(var job : jobs) {
             Worker current = workers.poll();
