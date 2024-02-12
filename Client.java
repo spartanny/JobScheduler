@@ -26,11 +26,17 @@ public class Client {
         Job job5 = jobBuilder.name("J5").duration(10).priority(2).deadline(30).user(User.USER).build();
 
         List<Job> tasks = List.of(job1, job2, job3, job4, job5);
+        JobScheduler sjfScheduler = new JobScheduler(new SjfStrategy(), threadManager);
+        sjfScheduler.scheduleJobs(tasks);
 
-        System.out.println("SJF");
-        threadManager.schedule(new SjfStrategy(), tasks);
+        threadManager.init(2);
+        JobScheduler fcfsScheduler = new JobScheduler(new FcfsStrategy(), threadManager);
+        fcfsScheduler.scheduleJobs(tasks);
 
-        System.out.println("FCFS");
-        threadManager.schedule(new FcfsStrategy(), tasks);
+//        System.out.println("SJF");
+//        threadManager.schedule(new SjfStrategy(), tasks);
+
+//        System.out.println("FCFS");
+//        threadManager.schedule(new FcfsStrategy(), tasks);
     }
 }

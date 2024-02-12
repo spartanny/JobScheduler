@@ -6,9 +6,9 @@ import java.util.List;
 // Workers are threads that will execute the jobs in this system
 public class Worker {
     //jobs that will be assigned to this thread
-    List<String> jobs;
-    int availableAt;
-    int id;
+    private List<String> jobs;
+    private Integer availableAt;
+    private Integer id;
 
     public int getId() { return id; }
     public int getAvailableAt() {
@@ -18,6 +18,11 @@ public class Worker {
         this.availableAt = availableAt;
     }
 
+    public List<String> getJobs(){
+        return jobs;
+    }
+
+    private Worker(){} // making a private constructor so that no one can make a worker with empty id
     public Worker(int id) {
         jobs = new ArrayList<>();
         availableAt = 0;
